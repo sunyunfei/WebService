@@ -8,68 +8,40 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,WebServiceManagerDelegate {
 
+    @IBOutlet weak var textView: UITextView!
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        webServiceConnect(nameSpace: "http://WebXml.com.cn/", urlStr: "http://www.webxml.com.cn/WebServices/WeatherWebService.asmx", method: "getSupportCity")
+        textView.isEditable = false//不允许编辑
+        
+        /****************************需要改变的部分*******************************************/
+        //参数
+        let dic:Dictionary<String,AnyObject> = ["byProvinceName":"上海" as AnyObject]
+        
+        //请求类
+        let manager:WebServiceManager = WebServiceManager()
+        //请求代理
+        manager.delegate = self
+        
+        //请求方法
+        manager.webServiceConnect(nameSpace: "http://WebXml.com.cn/", urlStr: "http://www.webxml.com.cn/WebServices/WeatherWebService.asmx", method: "getSupportCity",paramDic: dic)
+        
+        /********************************************************************************/
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    func transmitDataToVC(dataStr:String){
+    
+        textView.text = dataStr
     }
-
-
+    
+    func transmitBodyToVC(bodyStr:String){
     
     
-    /*
-     nameSpace:命名空间
-     urlStr:请求接口
-     method:方法体
-     */
-    func webServiceConnect( nameSpace:String, urlStr:String, method:String){
-        
-        //soap的配置
-        let soapMsg:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"+"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"+"<soap:Body>\n"+"<"+method+" xmlns=\""+nameSpace+"\">\n"+"<byProvinceName>"+"北京"+"</byProvinceName>\n"+"</"+method+">\n"+"</soap:Body>\n"+"</soap:Envelope>\n"
-        
-        let soapMsg2:NSString = soapMsg as NSString
-        //接口的转换为url
-        let url:URL = URL.init(string:urlStr)!
-        //计算出soap所有的长度，配置头使用
-        let msgLength:NSString = NSString.init(format: "%i", soapMsg2.length)
-        //创建request请求，把请求需要的参数配置
-        var request:URLRequest = NSMutableURLRequest.init() as URLRequest
-        //请求的参数配置，不用修改
-        request.timeoutInterval = 10
-        request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.url = url
-        request.httpMethod = "POST"
-        //请求头的配置
-        request.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.addValue(msgLength as String, forHTTPHeaderField: "Content-Length")
-        request.httpBody = soapMsg.data(using: String.Encoding.utf8)
-        //soapAction的配置
-        let soapActionStr:String = nameSpace + method
-        request.addValue(soapActionStr, forHTTPHeaderField: "SOAPAction")
-        
-        //开始网络session请求的单例创建
-        let session:URLSession = URLSession.shared
-        //开始请求
-        let task:URLSessionDataTask = session.dataTask(with: request as URLRequest , completionHandler: {( data, respond, error) -> Void in
-            
-            if (error != nil){
-                
-                print("error is coming")
-            }else{
-                //结果输出
-                let result:NSString = NSString.init(data: data!, encoding: String.Encoding.utf8.rawValue)!
-                print("result=\(result),\n adress=\(request.url)")
-            }
-        })
-        
-        //提交请求
-        task.resume()
+        print("代理传递过来的body数据:\(bodyStr)")
     }
 }
 

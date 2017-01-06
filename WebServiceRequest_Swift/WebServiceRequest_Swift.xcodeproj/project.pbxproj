@@ -14,6 +14,7 @@
 		05E190CD1E1F7017009E0496 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05E190CB1E1F7017009E0496 /* LaunchScreen.storyboard */; };
 		05E190D81E1F7017009E0496 /* WebServiceRequest_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E190D71E1F7017009E0496 /* WebServiceRequest_SwiftTests.swift */; };
 		05E190E31E1F7017009E0496 /* WebServiceRequest_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E190E21E1F7017009E0496 /* WebServiceRequest_SwiftUITests.swift */; };
+		05E191301E1F8D06009E0496 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1912F1E1F8D06009E0496 /* WebServiceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		05E190DE1E1F7017009E0496 /* WebServiceRequest_SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebServiceRequest_SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05E190E21E1F7017009E0496 /* WebServiceRequest_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceRequest_SwiftUITests.swift; sourceTree = "<group>"; };
 		05E190E41E1F7017009E0496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05E1912F1E1F8D06009E0496 /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				05E190C21E1F7017009E0496 /* AppDelegate.swift */,
 				05E190C41E1F7017009E0496 /* ViewController.swift */,
+				05E1912F1E1F8D06009E0496 /* WebServiceManager.swift */,
 				05E190C61E1F7017009E0496 /* Main.storyboard */,
 				05E190C91E1F7017009E0496 /* Assets.xcassets */,
 				05E190CB1E1F7017009E0496 /* LaunchScreen.storyboard */,
@@ -264,6 +267,7 @@
 			files = (
 				05E190C51E1F7017009E0496 /* ViewController.swift in Sources */,
 				05E190C31E1F7017009E0496 /* AppDelegate.swift in Sources */,
+				05E191301E1F8D06009E0496 /* WebServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
